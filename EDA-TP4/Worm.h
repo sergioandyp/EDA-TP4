@@ -32,7 +32,7 @@ public:
 
 	// Devuelve un puntero a la posicion de la imagen en el arreglo.
 	// La imagen corresponde al estado actual del worm
-	void* getImage(unsigned Imagesize);
+	void* getImage(unsigned int Imagesize);
 
 	// Ejemplo de llamada:
 	//ALLEGRO_BITMAP* actualImage = (ALLEGRO_BITMAP *) getImage(sizeof(ALLEGRO_BITMAP*))
