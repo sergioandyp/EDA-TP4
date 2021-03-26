@@ -1,4 +1,4 @@
-#include <iostram>
+#include <iostream>
 
 int main() {
 
