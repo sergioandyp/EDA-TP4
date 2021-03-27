@@ -169,10 +169,10 @@ void* Worm::getImage(unsigned int imagesize) {
 			unsigned int frame = (tickCount - 9) % 14 + 1;		// Es el frame dentro del loop (los FX de la imagen)
 																// Notar que frame es un numero entre 1 y 14
 			if (frame <= 8) {
-				image += imagesize * (3+frame);
+				image += imagesize * (2+frame);
 			}
 			else if (frame <= 13) {
-				image += imagesize * (2 + frame);
+				image += imagesize * (1 + frame);
 			}
 			else {	// frame == 14
 				image += imagesize * 3;

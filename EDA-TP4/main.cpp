@@ -14,6 +14,7 @@ int main() {
 }
 
 void testImages() {
+
 	Worm worm;
 	int walk[20];
 	int jump[20];
@@ -36,6 +37,20 @@ void testImages() {
 	for (int i = 0; i < 70; i++) {
 		cout << *(int*)worm.getImage(sizeof(walk[0])) << endl;
 		worm.update(0,0);
+	}
+
+	cout << endl << "Ahora salto:" << endl << endl;
+
+	worm.jump();		// Todavia no esta implementado el jump
+	for (int i = 0; i < 70; i++) {
+		cout << *(int*)worm.getImage(sizeof(walk[0])) << endl;
+		worm.update(0, 0);
+	}
+	cout << "Lo freno" << endl;
+	worm.stop();
+	for (int i = 0; i < 70; i++) {
+		cout << *(int*)worm.getImage(sizeof(walk[0])) << endl;
+		worm.update(0, 0);
 	}
 
 	cout << "FIN" << endl;
