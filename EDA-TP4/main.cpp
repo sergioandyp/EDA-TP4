@@ -1,8 +1,9 @@
 #include <iostream>
+#include "World.h"
 
 int main() {
 
-
+	World mundo;
 
 }
 
@@ -34,7 +35,8 @@ while (1){	//RedrawNow se maneja por un timer de allegro
 	}
 
 	if (eventoTICK)..{
-		Backend();			//Tipo los update
+		this->worms[0].update(this->walkSpeed, this->jumpSpeed);	//Actualizo ambos worms segun su estado
+		this->worms[1].update(this->walkSpeed, this->jumpSpeed);
 		Dibujar();			//Draw
 	}
 }

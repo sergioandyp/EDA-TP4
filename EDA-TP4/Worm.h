@@ -4,12 +4,15 @@
 
 #include "Point.h"
 
-typedef enum WORM_STATE { WALKING, JUMPING, STAND_BY };		// FALTA COMPLETAR
+typedef enum WORM_STATE { WALKING, JUMPING, STAND_BY, STOP_WALKING, STOP_JUMPING};
 
 typedef enum DIRECTION { LEFT, RIGHT };
 
 class Worm {
 public:
+
+	//constructor, no es la gran cosa porque despues uso el de World
+	Worm();
 
 	// getters
 	unsigned int getX();
@@ -21,14 +24,16 @@ public:
 	// setters (devuelve 1 si hubo error)
 	bool setX(unsigned int x);
 	bool setY(unsigned int y);
+	bool setDirection(DIRECTION dire);
 	bool setWalkImages(void* w_images);
 	bool setJumpImages(void* j_images);
 
 	// Movement
 	bool jump();		// Setea estado a JUMP
 	bool walk();		// Setea estado a WALK
+	bool stop();
 
-	bool update();
+	bool update(double walkSpeed, double jumpSpeed);
 
 	// Devuelve un puntero a la posicion de la imagen en el arreglo.
 	// La imagen corresponde al estado actual del worm
