@@ -148,6 +148,34 @@
     <ClInclude Include="World.h" />
     <ClInclude Include="Worm.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="Scenario.png" />
+    <Image Include="wjump\wjump-F1.png" />
+    <Image Include="wjump\wjump-F10.png" />
+    <Image Include="wjump\wjump-F2.png" />
+    <Image Include="wjump\wjump-F3.png" />
+    <Image Include="wjump\wjump-F4.png" />
+    <Image Include="wjump\wjump-F5.png" />
+    <Image Include="wjump\wjump-F6.png" />
+    <Image Include="wjump\wjump-F7.png" />
+    <Image Include="wjump\wjump-F8.png" />
+    <Image Include="wjump\wjump-F9.png" />
+    <Image Include="wwalking\wwalk-F1.png" />
+    <Image Include="wwalking\wwalk-F10.png" />
+    <Image Include="wwalking\wwalk-F11.png" />
+    <Image Include="wwalking\wwalk-F12.png" />
+    <Image Include="wwalking\wwalk-F13.png" />
+    <Image Include="wwalking\wwalk-F14.png" />
+    <Image Include="wwalking\wwalk-F15.png" />
+    <Image Include="wwalking\wwalk-F2.png" />
+    <Image Include="wwalking\wwalk-F3.png" />
+    <Image Include="wwalking\wwalk-F4.png" />
+    <Image Include="wwalking\wwalk-F5.png" />
+    <Image Include="wwalking\wwalk-F6.png" />
+    <Image Include="wwalking\wwalk-F7.png" />
+    <Image Include="wwalking\wwalk-F8.png" />
+    <Image Include="wwalking\wwalk-F9.png" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

@@ -1,9 +1,44 @@
 #include <iostream>
 #include "World.h"
 
+using namespace std;
+
+void testImages();
+
 int main() {
 
 	World mundo;
+
+	testImages();
+
+}
+
+void testImages() {
+	Worm worm;
+	int walk[20];
+	int jump[20];
+
+	for (int i = 0; i < 20; i++) {
+		walk[i] = i + 1;
+		jump[i] = i + 1;
+	}
+
+	worm.setWalkImages(walk);
+	worm.setJumpImages(jump);
+
+	worm.walk();
+	for (int i = 0; i < 70; i++) {
+		cout << *(int*)worm.getImage(sizeof(walk[0])) << endl;
+		worm.update(0,0);
+	}
+	cout << "Lo freno" << endl;
+	worm.stop();
+	for (int i = 0; i < 70; i++) {
+		cout << *(int*)worm.getImage(sizeof(walk[0])) << endl;
+		worm.update(0,0);
+	}
+
+	cout << "FIN" << endl;
 
 }
 

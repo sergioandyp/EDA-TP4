@@ -38,7 +38,7 @@ unsigned int Worm::getDirection() {
 bool Worm::setX(unsigned int x) {
 
 	this->pos.x = x;
-	return 0;	//TODO: Como puede tener esto un error?
+	return 0;	//TODO: Como puede tener esto un error?		//  Avisar si se toca un limite?
 }
 bool Worm::setY(unsigned int y) {
 
@@ -52,8 +52,14 @@ bool Worm::setDirection(DIRECTION dire) {
 }
 bool Worm::setWalkImages(void* w_images) {
 
+	this->walkingImages = w_images;
+	return 0;	//TODO: Como puede tener esto un error?
+
 }
 bool Worm::setJumpImages(void* j_images) {
+	
+	this->jumpingImages = j_images;
+	return 0;	//TODO: Como puede tener esto un error?
 
 }
 
@@ -63,11 +69,15 @@ bool Worm::jump() {	// Setea estado a JUMP y reinicia tickCount
 
 	this->state = JUMPING;
 	this->tickCount = 1;
+
+	return true;	// No se chequea si estaba en movimiento??
 }
 bool Worm::walk() {		// Setea estado a WALK y reinicia tickCount
 
 	this->state = WALKING;
 	this->tickCount = 1;
+
+	return true;	// No se chequea si estaba en movimiento??
 }
 bool Worm::stop() {		//Va a parar el movimiento del worm solamente si pasaron menos de 8 frames
 
@@ -135,12 +145,56 @@ bool Worm::update(double walkSpeed, double jumpSpeed) {
 
 		//do nothing
 	}
+
+	return 0;	// Creo que aca no hace falta devolver nada
 }
 
 // Devuelve un puntero a la posicion de la imagen en el arreglo.
 // La imagen corresponde al estado actual del worm
-void* Worm::getImage(unsigned int Imagesize) {
+void* Worm::getImage(unsigned int imagesize) {
 
+	char* image = ((char*)this->walkingImages);		// La de STAND_BY seria la primera?
+
+	switch (this->state) {
+	case STAND_BY:
+		// Es la default
+		break;
+	case WALKING:
+	case STOP_WALKING:
+		image = (char*)this->walkingImages;
+		if (tickCount >= 6 && tickCount <= 8) {		// WARM_UP
+			image += imagesize * (tickCount - 6);
+		}
+		else if (tickCount >= 9 && tickCount <= 50) {
+			unsigned int frame = (tickCount - 9) % 14 + 1;		// Es el frame dentro del loop (los FX de la imagen)
+																// Notar que frame es un numero entre 1 y 14
+			if (frame <= 8) {
+				image += imagesize * (3+frame);
+			}
+			else if (frame <= 13) {
+				image += imagesize * (2 + frame);
+			}
+			else {	// frame == 14
+				image += imagesize * 3;
+			}
+		}
+		break;
+	case JUMPING:
+	case STOP_JUMPING:
+
+		image = (char*) this->jumpingImages;
+
+		if (tickCount >= 6 && tickCount <= 15) {	// ------> ASUMO QUE LOS TICKS NO SE CUENTAN MIENTRAS ESTA EN EL AIRE <--------
+			image += imagesize * (tickCount - 6);
+		}
+
+		break;
+	default:
+		// Estado invalido
+		break;
+	}
+
+	return image;
 
 }
 

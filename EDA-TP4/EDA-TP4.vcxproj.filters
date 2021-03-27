@@ -13,6 +13,12 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Resource Files\wwalking">
+      <UniqueIdentifier>{89b8417f-9aef-4cce-bbcf-90cccc95779e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\wjump">
+      <UniqueIdentifier>{9624f265-6c1f-413c-bade-d82d7fd2fac5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -35,5 +41,85 @@
     <ClInclude Include="Point.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Scenario.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="wjump\wjump-F1.png">
+      <Filter>Resource Files\wjump</Filter>
+    </Image>
+    <Image Include="wjump\wjump-F2.png">
+      <Filter>Resource Files\wjump</Filter>
+    </Image>
+    <Image Include="wjump\wjump-F3.png">
+      <Filter>Resource Files\wjump</Filter>
+    </Image>
+    <Image Include="wjump\wjump-F4.png">
+      <Filter>Resource Files\wjump</Filter>
+    </Image>
+    <Image Include="wjump\wjump-F5.png">
+      <Filter>Resource Files\wjump</Filter>
+    </Image>
+    <Image Include="wjump\wjump-F6.png">
+      <Filter>Resource Files\wjump</Filter>
+    </Image>
+    <Image Include="wjump\wjump-F7.png">
+      <Filter>Resource Files\wjump</Filter>
+    </Image>
+    <Image Include="wjump\wjump-F8.png">
+      <Filter>Resource Files\wjump</Filter>
+    </Image>
+    <Image Include="wjump\wjump-F9.png">
+      <Filter>Resource Files\wjump</Filter>
+    </Image>
+    <Image Include="wjump\wjump-F10.png">
+      <Filter>Resource Files\wjump</Filter>
+    </Image>
+    <Image Include="wwalking\wwalk-F1.png">
+      <Filter>Resource Files\wwalking</Filter>
+    </Image>
+    <Image Include="wwalking\wwalk-F2.png">
+      <Filter>Resource Files\wwalking</Filter>
+    </Image>
+    <Image Include="wwalking\wwalk-F3.png">
+      <Filter>Resource Files\wwalking</Filter>
+    </Image>
+    <Image Include="wwalking\wwalk-F4.png">
+      <Filter>Resource Files\wwalking</Filter>
+    </Image>
+    <Image Include="wwalking\wwalk-F5.png">
+      <Filter>Resource Files\wwalking</Filter>
+    </Image>
+    <Image Include="wwalking\wwalk-F6.png">
+      <Filter>Resource Files\wwalking</Filter>
+    </Image>
+    <Image Include="wwalking\wwalk-F7.png">
+      <Filter>Resource Files\wwalking</Filter>
+    </Image>
+    <Image Include="wwalking\wwalk-F8.png">
+      <Filter>Resource Files\wwalking</Filter>
+    </Image>
+    <Image Include="wwalking\wwalk-F9.png">
+      <Filter>Resource Files\wwalking</Filter>
+    </Image>
+    <Image Include="wwalking\wwalk-F10.png">
+      <Filter>Resource Files\wwalking</Filter>
+    </Image>
+    <Image Include="wwalking\wwalk-F11.png">
+      <Filter>Resource Files\wwalking</Filter>
+    </Image>
+    <Image Include="wwalking\wwalk-F12.png">
+      <Filter>Resource Files\wwalking</Filter>
+    </Image>
+    <Image Include="wwalking\wwalk-F13.png">
+      <Filter>Resource Files\wwalking</Filter>
+    </Image>
+    <Image Include="wwalking\wwalk-F14.png">
+      <Filter>Resource Files\wwalking</Filter>
+    </Image>
+    <Image Include="wwalking\wwalk-F15.png">
+      <Filter>Resource Files\wwalking</Filter>
+    </Image>
   </ItemGroup>
 </Project>

@@ -4,9 +4,9 @@
 
 #include "Point.h"
 
-typedef enum WORM_STATE { WALKING, JUMPING, STAND_BY, STOP_WALKING, STOP_JUMPING};
+enum WORM_STATE { WALKING, JUMPING, STAND_BY, STOP_WALKING, STOP_JUMPING};
 
-typedef enum DIRECTION { LEFT, RIGHT };
+enum DIRECTION { LEFT, RIGHT };
 
 class Worm {
 public:
@@ -37,7 +37,7 @@ public:
 
 	// Devuelve un puntero a la posicion de la imagen en el arreglo.
 	// La imagen corresponde al estado actual del worm
-	void* getImage(unsigned int Imagesize);
+	void* getImage(unsigned int imagesize);
 
 	// Ejemplo de llamada:
 	//ALLEGRO_BITMAP* actualImage = (ALLEGRO_BITMAP *) getImage(sizeof(ALLEGRO_BITMAP*))
@@ -50,6 +50,8 @@ private:
 	double speed[2];	// {x, y}
 	void* jumpingImages;
 	void* walkingImages;
+
+	bool isOnFloor();		// Debe devolver si el worm esta tocando el piso o no
 };
 
 #endif

@@ -3,7 +3,7 @@
 
 #include "Worm.h"
 
-typedef enum EVENT { QUIT,
+enum EVENT { QUIT,
 					DOWN_KEY_A, DOWN_KEY_W, DOWN_KEY_D, DOWN_KEY_UP, DOWN_KEY_LEFT, DOWN_KEY_RIGHT,
 					UP_KEY_A, UP_KEY_W, UP_KEY_D, UP_KEY_UP, UP_KEY_LEFT, UP_KEY_RIGHT
 };
