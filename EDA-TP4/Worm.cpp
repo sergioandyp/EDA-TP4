@@ -71,6 +71,7 @@ bool Worm::jump() {	// Setea estado a JUMP y reinicia tickCount
 	this->tickCount = 1;
 
 	return true;	// No se chequea si estaba en movimiento??
+					//Tenes un drama si alguien apreta, suelta despues de los 8 frames y despues apretas de vuelta y soltas antes de los 8 frames. Frenaste el movimiento
 }
 bool Worm::walk() {		// Setea estado a WALK y reinicia tickCount
 
