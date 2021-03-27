@@ -127,5 +127,8 @@
     <Image Include="wwalking\wwalk-F15.png">
       <Filter>Resource Files\wwalking</Filter>
     </Image>
+    <Image Include="Background.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

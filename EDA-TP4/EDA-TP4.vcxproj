@@ -151,6 +151,7 @@
     <ClInclude Include="Worm.h" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="Background.jpg" />
     <Image Include="Scenario.png" />
     <Image Include="wjump\wjump-F1.png" />
     <Image Include="wjump\wjump-F10.png" />
