@@ -19,6 +19,8 @@ public:
 	double walkSpeed;
 	double jumpSpeed;
 
+	void* backgroundImg;
+
 	void dispatcher(EVENT event);
 
 };
