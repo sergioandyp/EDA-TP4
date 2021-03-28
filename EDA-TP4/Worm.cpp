@@ -69,17 +69,21 @@ bool Worm::setJumpImages(void* j_images) {
 bool Worm::jump() {	// Setea estado a JUMP y reinicia tickCount
 
 	this->state = JUMPING;
-	this->tickCount = 1;
+	if (this->state != STOP_JUMPING) {
+		this->tickCount = 1;
+	}
 
-	return true;	// No se chequea si estaba en movimiento??
-					//Tenes un drama si alguien apreta, suelta despues de los 8 frames y despues apretas de vuelta y soltas antes de los 8 frames. Frenaste el movimiento
+	return true;	
+
 }
 bool Worm::walk() {		// Setea estado a WALK y reinicia tickCount
 
 	this->state = WALKING;
-	this->tickCount = 1;
-
-	return true;	// No se chequea si estaba en movimiento??
+	if (this->state != STOP_WALKING) {	//Solo le reinicio el contador si ya no estaba moviendose
+										//Entonces si vos apretaste mientras ya se estaba moviendo va a terminar de moverse
+		this->tickCount = 1;			//Y va a seguir moviendose hasta que sueltes la tecla
+	}
+	return true;	
 }
 
 bool Worm::stopWalking() {		//Va a parar el movimiento del worm solamente si pasaron menos de 8 frames
