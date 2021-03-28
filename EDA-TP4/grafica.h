@@ -2,6 +2,7 @@
 #define GRAFICA
 
 #include "Worm.h"
+#include "World.h"
 
 /***************************************************************************
 *                      Definiciones de constantes
@@ -47,5 +48,14 @@ void redraw(Worm worms[]);
 *			 OK si no hubo error.
 ***************************************************************************/
 bool loadImages(Worm worms[]);
+
+/***************************************************************************
+* GETEVENT
+*	Traduce los eventos de Allegro a eventos admitidos por el main.
+*	Recibe: nada
+*	Retorna: EMPTY si no hubo eventos nuevos.
+*			 El evento si hubo algun evento nuevo.
+***************************************************************************/
+EVENT getEvent();
 
 #endif //GRAFICA

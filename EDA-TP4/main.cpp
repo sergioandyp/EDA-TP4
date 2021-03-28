@@ -26,13 +26,17 @@ int main() {
 	redraw(mundo.worms);
 	cout << "OK draw" << endl;
 
-	EVENT evento = QUIT;	//CAMBIAR A TICK CUANDO SE PRUEBE EL CODIGO COMPLETO
+	EVENT evento = EMPTY;	//CAMBIAR A TICK CUANDO SE PRUEBE EL CODIGO COMPLETO
 
 	while (evento != QUIT) {
 
-		//evento = getEvent();
+		evento = getEvent();
 
-		if (evento == TICK) {
+		// Debugger de eventos
+		if(evento != EMPTY && evento != TICK)
+		cout << "Evento: \t" << evento << endl;
+
+		 if (evento == TICK) {
 
 			mundo.worms[0].update(mundo.walkSpeed, mundo.jumpSpeed, mundo.gravity);	//Actualizo ambos worms segun su estado
 			mundo.worms[1].update(mundo.walkSpeed, mundo.jumpSpeed, mundo.gravity);

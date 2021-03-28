@@ -1,5 +1,4 @@
 #include "grafica.h"
-#include "Worm.h"
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_image.h>
 #include <iostream>
@@ -16,9 +15,6 @@
 /**************************************************************************/
 
 using namespace std;
-
-ALLEGRO_EVENT_QUEUE* allegroQueue;
-
 /***************************************************************************
 *                      Variables locales
 ***************************************************************************/
@@ -28,6 +24,7 @@ static ALLEGRO_BITMAP* mapImg;
 static ALLEGRO_BITMAP* backgroundImg;
 static ALLEGRO_DISPLAY* display;
 static ALLEGRO_TIMER* timer; 
+static ALLEGRO_EVENT_QUEUE* allegroQueue;
 /**************************************************************************/
 
 /***************************************************************************
@@ -63,13 +60,14 @@ bool initAllegro(void)
     // Creamos un display
     display = al_create_display(DISPLAYWIDTH, DISPLAYHEIGHT);
     
-    // Creamos el timer para dibujar
+    // Creamos e inicializamos el timer para dibujar.
     timer = al_create_timer(1.0/FPS_ALLEGRO);
+    al_start_timer(timer);
 
-    // Creamos la eventqueue
+    // Creamos la eventqueue.
     allegroQueue = al_create_event_queue();
 
-    // Agregamos a la eventqueue los eventos del teclado, displa y timer
+    // Agregamos a la eventqueue los eventos del teclado, displa y timer.
     al_register_event_source(allegroQueue, al_get_keyboard_event_source());
     al_register_event_source(allegroQueue, al_get_display_event_source(display));
     al_register_event_source(allegroQueue, al_get_timer_event_source(timer));
@@ -118,16 +116,20 @@ void redraw(Worm worms[])
     al_draw_bitmap(backgroundImg, 0.0, 0.0, 0);
     al_draw_bitmap(mapImg, 0.0, 0.0, 0);
 
+    ALLEGRO_BITMAP* imagen;
+
     //Dibujamos cada worm en su posicion apropiada y la imagen apropiada.
     for (int i = 0; i < CANT_WORMS; i++)
     {
+        imagen = (ALLEGRO_BITMAP*)worms[i].getImage(sizeof(ALLEGRO_BITMAP*));
+        
         if (worms[i].getDirection() == LEFT)
             // Si el worm se mueve hacia la izquierda lo mostramos normal.
-            al_draw_bitmap((ALLEGRO_BITMAP*)worms[i].getImage(sizeof(ALLEGRO_BITMAP*), (float)worms[i].getX(), (float)worms[i].getY(), 0);
+            al_draw_bitmap(imagen, (float) worms[i].getX(), (float)worms[i].getY(), 0);
 
         else if (worms[i].getDirection() == RIGHT)
             // Si el worm se mueve hacia la derecha lo mostramos espejada.
-            al_draw_bitmap((ALLEGRO_BITMAP*)worms[i].getImage(sizeof(ALLEGRO_BITMAP*)), (float)worms[i].getX(), (float)worms[i].getY(), ALLEGRO_FLIP_HORIZONTAL);
+            al_draw_bitmap(imagen, (float)worms[i].getX(), (float)worms[i].getY(), ALLEGRO_FLIP_HORIZONTAL);
     }
     al_flip_display();
     al_rest(20);     
@@ -215,4 +217,95 @@ bool loadBackground()
 
     // Si no hubo error, retorno que el proceso fue exitoso.
     return OK;
+}
+
+EVENT getEvent()
+{
+    ALLEGRO_EVENT evento;
+    
+    // Si no hay un evento nuevo, retorno EMPTY
+    if (!al_get_next_event(allegroQueue, &evento))
+        return EMPTY;
+
+    // Dependiendo el tipo de evento retorno cosas distintas
+    switch (evento.type)
+    {
+
+    // Si apretaron la X del display, retorno que se desea salir.
+    case ALLEGRO_EVENT_DISPLAY_CLOSE:
+        return QUIT;
+        
+    // Si me llegra una señal del timer, lo retorno.
+    case ALLEGRO_EVENT_TIMER:
+        return  TICK;
+
+    // Si se apretó alguna tecla del teclado, aviso què tecla se apretó.
+    case ALLEGRO_EVENT_KEY_DOWN:
+        switch (evento.keyboard.keycode)
+        {
+        case ALLEGRO_KEY_A:
+            return DOWN_KEY_A;
+
+        case ALLEGRO_KEY_W:
+            return DOWN_KEY_W;
+
+        case ALLEGRO_KEY_D:
+            return DOWN_KEY_D;
+
+        case ALLEGRO_KEY_UP:
+            return DOWN_KEY_UP;
+
+        case ALLEGRO_KEY_LEFT:
+            return DOWN_KEY_LEFT;
+
+        case ALLEGRO_KEY_RIGHT:
+            return DOWN_KEY_RIGHT;
+
+        case ALLEGRO_KEY_ESCAPE:
+        case ALLEGRO_KEY_Q:
+            return QUIT;
+
+        //Si la tecla no está entre las admisibles, 
+        // retorno que no se apretó nada.
+        default:
+            return EMPTY;
+        }
+        break;
+    
+    // Si se soltó alguna tecla del teclado, aviso què tecla se soltó.
+    case ALLEGRO_EVENT_KEY_UP:
+        switch (evento.keyboard.keycode)
+        {
+        case ALLEGRO_KEY_A:
+            return UP_KEY_A;
+
+        case ALLEGRO_KEY_W:
+            return UP_KEY_W;
+
+        case ALLEGRO_KEY_D:
+            return UP_KEY_D;
+
+        case ALLEGRO_KEY_UP:
+            return UP_KEY_UP;
+
+        case ALLEGRO_KEY_LEFT:
+            return UP_KEY_LEFT;
+
+        case ALLEGRO_KEY_RIGHT:
+            return UP_KEY_RIGHT;
+
+        //Si la tecla no está entre las admisibles, 
+        // retorno que no se apretó nada.
+        default:
+            return EMPTY;
+        }
+        break;
+    
+    //Si el evento no está entre los admisibles, 
+    // retorno que no hay nuevo evento.
+    default:
+        return EMPTY;
+    }
+
+   
 }
