@@ -1,5 +1,4 @@
 #ifndef _WORM_H_
-
 #define _WORM_H_
 
 #include "Point.h"
@@ -31,7 +30,8 @@ public:
 	// Movement
 	bool jump();		// Setea estado a JUMP
 	bool walk();		// Setea estado a WALK
-	bool stop();
+	bool stopWalking();		// OJO! ACA HABRIA QUE CONSIDERAR LA DIRECCION TAMBIEN
+	bool stopJumping();
 
 	bool update(double walkSpeed, double jumpSpeed);
 

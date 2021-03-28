@@ -36,7 +36,7 @@ void World::dispatcher(EVENT event) {
 		break;
 	case UP_KEY_A:
 
-		this->worms[0].stop();	
+		this->worms[0].stopWalking();	// OJO! el stop es solo para el walk, pero si esta saltando?
 
 		break;
 	case DOWN_KEY_LEFT:
@@ -47,7 +47,7 @@ void World::dispatcher(EVENT event) {
 		break;
 	case UP_KEY_LEFT:
 
-		this->worms[1].stop();
+		this->worms[1].stopWalking();
 
 		break;
 	case DOWN_KEY_D:
@@ -58,7 +58,7 @@ void World::dispatcher(EVENT event) {
 		break;
 	case UP_KEY_D:
 
-		this->worms[0].stop();
+		this->worms[0].stopWalking();
 
 		break;
 	case DOWN_KEY_RIGHT:
@@ -69,7 +69,7 @@ void World::dispatcher(EVENT event) {
 		break;
 	case UP_KEY_RIGHT:
 
-		this->worms[1].stop();
+		this->worms[1].stopWalking();
 
 		break;
 	
@@ -78,16 +78,16 @@ void World::dispatcher(EVENT event) {
 		*/
 
 	case DOWN_KEY_W:
-
+		this->worms[0].jump();
 		break;
 	case UP_KEY_W:
-
+		this->worms[0].stopJumping();
 		break;
 	case DOWN_KEY_UP:
-
+		this->worms[1].jump();
 		break;
 	case UP_KEY_UP:
-
+		this->worms[1].stopJumping();
 		break;
 
 		/*

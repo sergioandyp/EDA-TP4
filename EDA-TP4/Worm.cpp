@@ -1,6 +1,5 @@
 #include "Worm.h"
 
-
 //constructor
 Worm::Worm(){
 	
@@ -80,7 +79,8 @@ bool Worm::walk() {		// Setea estado a WALK y reinicia tickCount
 
 	return true;	// No se chequea si estaba en movimiento??
 }
-bool Worm::stop() {		//Va a parar el movimiento del worm solamente si pasaron menos de 8 frames
+
+bool Worm::stopWalking() {		//Va a parar el movimiento del worm solamente si pasaron menos de 8 frames
 
 	int error = 0;
 
@@ -94,6 +94,29 @@ bool Worm::stop() {		//Va a parar el movimiento del worm solamente si pasaron me
 	}
 	else {
 
+	}
+
+	return error;
+}
+
+// Detiene el salto del worm.
+// Si todavia no habia empezado el salto, no lo empieza
+// Si ya habia empezado, lo termina y luego para de saltar
+// Devuelve: 0 si estaba queriendo saltar, 1 si no.
+bool Worm::stopJumping() {
+
+	int error = 1;
+
+	if (this->state == JUMPING) {	// Solo detengo el salto si esta saltando... LOGIC
+
+		if (this->tickCount <= 5) {	// Si es antes del WARM_UP lo paro
+			this->state = STAND_BY;
+			this->tickCount = 0;
+		}
+		else{	// Si es despues aviso que se tiene que parar cuando termine
+			this->state = STOP_JUMPING;
+		}
+		error = 0;	// Se logro detener la animacion de salto
 	}
 
 	return error;

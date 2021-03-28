@@ -42,7 +42,7 @@ int main() {
 }
 
 void testImages() {
-	/*Worm worm;
+	Worm worm;
 	int walk[20];
 	int jump[20];
 
@@ -61,7 +61,7 @@ void testImages() {
 		redraw(&worm);
 	}
 	cout << "Lo freno" << endl;
-	worm.stop();
+	worm.stopWalking();
 	for (int i = 0; i < 70; i++) {
 		cout << *(int*)worm.getImage(sizeof(walk[0])) << endl;
 		worm.update(0,0);
@@ -75,13 +75,13 @@ void testImages() {
 		worm.update(0, 0);
 	}
 	cout << "Lo freno" << endl;
-	worm.stop();
+	worm.stopJumping();
 	for (int i = 0; i < 70; i++) {
 		cout << *(int*)worm.getImage(sizeof(walk[0])) << endl;
 		worm.update(0, 0);
 	}
 
-	cout << "FIN" << endl;*/
+	cout << "FIN" << endl;
 
 }
 
