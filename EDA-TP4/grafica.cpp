@@ -123,15 +123,11 @@ void redraw(Worm worms[])
     {
         if (worms[i].getDirection() == LEFT)
             // Si el worm se mueve hacia la izquierda lo mostramos normal.
-            //(ALLEGRO_BITMAP*)worms[i].getImage(sizeof(ALLEGRO_BITMAP*))
-            al_draw_bitmap(walkingImg[0], (float)worms[i].getX(), (float)worms[i].getY(), 0);
+            al_draw_bitmap((ALLEGRO_BITMAP*)worms[i].getImage(sizeof(ALLEGRO_BITMAP*), (float)worms[i].getX(), (float)worms[i].getY(), 0);
 
         else if (worms[i].getDirection() == RIGHT)
             // Si el worm se mueve hacia la derecha lo mostramos espejada.
-        {
-            //(ALLEGRO_BITMAP*)worms[i].getImage(sizeof(ALLEGRO_BITMAP*));
-            al_draw_bitmap(walkingImg[0], (float)worms[i].getX(), (float)worms[i].getY(), ALLEGRO_FLIP_HORIZONTAL);
-        }
+            al_draw_bitmap((ALLEGRO_BITMAP*)worms[i].getImage(sizeof(ALLEGRO_BITMAP*)), (float)worms[i].getX(), (float)worms[i].getY(), ALLEGRO_FLIP_HORIZONTAL);
     }
     al_flip_display();
     al_rest(20);     
