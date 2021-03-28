@@ -134,7 +134,7 @@ void redraw(Worm worms[])
         }
     }
     al_flip_display();
-    al_rest(20); 
+    al_rest(20);     
 }
 
 bool loadWalkImages(Worm worms[])

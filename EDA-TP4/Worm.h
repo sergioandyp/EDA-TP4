@@ -33,7 +33,7 @@ public:
 	bool stopWalking();		// OJO! ACA HABRIA QUE CONSIDERAR LA DIRECCION TAMBIEN
 	bool stopJumping();
 
-	bool update(double walkSpeed, double jumpSpeed);
+	bool update(double walkSpeed, double jumpSpeed, double gravity);
 
 	// Devuelve un puntero a la posicion de la imagen en el arreglo.
 	// La imagen corresponde al estado actual del worm
@@ -47,7 +47,7 @@ private:
 	unsigned int tickCount;		// Contador de ticks para las animaciones.
 	WORM_STATE state;
 	DIRECTION dir;
-	double speed[2];	// {x, y}
+	double speed[2];	// {Vx, Vy}
 	void* jumpingImages;
 	void* walkingImages;
 

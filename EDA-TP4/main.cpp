@@ -10,7 +10,6 @@ int main() {
 
 	World mundo;
 
-
 	if (initAllegro())
 	{
 		return -1;
@@ -24,15 +23,26 @@ int main() {
 	}
 	cout << "OK load" << endl;
 
-	mundo.worms[0].setX(0);
-	mundo.worms[0].setY(600);
-	mundo.worms[0].setDirection(RIGHT);
-	mundo.worms[1].setX(1000);
-	mundo.worms[1].setY(600);
-	mundo.worms[1].setDirection(LEFT);
-
 	redraw(mundo.worms);
 	cout << "OK draw" << endl;
+
+	EVENT evento = QUIT;	//CAMBIAR A TICK CUANDO SE PRUEBE EL CODIGO COMPLETO
+
+	while (evento != QUIT) {
+
+		//evento = getEvent();
+
+		if (evento == TICK) {
+
+			mundo.worms[0].update(mundo.walkSpeed, mundo.jumpSpeed, mundo.gravity);	//Actualizo ambos worms segun su estado
+			mundo.worms[1].update(mundo.walkSpeed, mundo.jumpSpeed, mundo.gravity);
+			redraw(mundo.worms);			//Draw
+		}
+		else {
+
+			mundo.dispatcher(evento);
+		}
+	}
 
 	shutdownAllegro();
 	cout << "OK destroy" << endl;
@@ -100,22 +110,4 @@ void testImages() {
 	- World
 		- contructor
 		- 
-*/
-
-
-/*
-while (1){	//RedrawNow se maneja por un timer de allegro
-
-	evento = getEvent();	//TECLA - TICK - TECLA
-							
-	if (eventoTECLA)..{		//PRE-DISPATCHER
-		dispatcher();
-	}
-
-	if (eventoTICK)..{
-		this->worms[0].update(this->walkSpeed, this->jumpSpeed);	//Actualizo ambos worms segun su estado
-		this->worms[1].update(this->walkSpeed, this->jumpSpeed);
-		Dibujar();			//Draw
-	}
-}
 */

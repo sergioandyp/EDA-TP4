@@ -4,14 +4,14 @@
 World::World() {
 
 	//Worm de la izquierda
-	this->worms[0].setX(715);	
+	this->worms[0].setX(685);	
 	this->worms[0].setY(616);
 	this->worms[0].setDirection(RIGHT);
 
 	//Worm de la derecha
-	this->worms[0].setX(1185);
-	this->worms[0].setY(616);
-	this->worms[0].setDirection(LEFT);
+	this->worms[1].setX(1170);
+	this->worms[1].setY(616);
+	this->worms[1].setDirection(LEFT);
 
 	this->gravity = 0.24;
 	this->jumpSpeed = 4.5;	//TODO: Nose en que esta dada	

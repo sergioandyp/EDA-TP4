@@ -1,4 +1,6 @@
 #include "Worm.h"
+#include <math.h>
+# define PI           3.14159265358979323846  /* pi */
 
 //constructor
 Worm::Worm(){
@@ -122,7 +124,7 @@ bool Worm::stopJumping() {
 	return error;
 }
 
-bool Worm::update(double walkSpeed, double jumpSpeed) {
+bool Worm::update(double walkSpeed, double jumpSpeed, double gravity) {
 
 	int error = 0;
 
@@ -169,8 +171,75 @@ bool Worm::update(double walkSpeed, double jumpSpeed) {
 
 		//do nothing
 	}
+	if (this->state == JUMPING || this->state == STOP_JUMPING) {
 
-	return 0;	// Creo que aca no hace falta devolver nada
+		if (this->tickCount == 1) {	//Si es el primer tick seteo la velocidad inicial
+
+			this->speed[0] = jumpSpeed * cos(PI / 3);	//Vel en x
+			this->speed[1] = jumpSpeed * sin(PI / 3);	//Vel en y
+		}
+		if (this->tickCount <= 10) {	//TODO: nose muy bien hasta cuando el tickCount
+
+			this->tickCount++;
+		}
+
+		if (this->dir == LEFT) {
+
+			if (this->tickCount > 5) {
+
+				if (this->pos.x > 701) {	//Checkeo no irme del borde
+					this->pos.x -= speed[0];	//Actualizo la posicion
+				}
+				this->pos.y += speed[1];
+				if (this->pos.y <= 616) {
+
+					this->pos.y = 616;
+					if (this->state == STOP_JUMPING) {
+						this->state = STAND_BY;
+						this->tickCount = 1;
+					}
+					else if (this->state == JUMPING) {
+						this->tickCount = 1;
+					}
+				}
+
+				speed[1] -= gravity;		//Aplico la gravedad
+			}
+
+		}
+		else if (this->dir == RIGHT) {
+
+
+			if (this->tickCount > 5) {
+
+				if (this->pos.x < 1212) {	//Checkeo no irme del borde, TODO: hardcode de la posicion del borde?
+					this->pos.x += speed[0];	//Actualizo la posicion
+				}
+				this->pos.y += speed[1];
+
+				if (this->pos.y <= 616) {
+
+					this->pos.y = 616;
+					if (this->state == STOP_JUMPING) {
+						this->state = STAND_BY;
+						this->tickCount = 1;
+					}
+					else if (this->state == JUMPING) {
+						this->tickCount = 1;
+					}
+				}
+	
+				speed[1] -= gravity;		//Aplico la gravedad
+			}
+			
+		}
+		else {
+
+			error = 1;
+		}
+	}
+
+	return error;
 }
 
 // Devuelve un puntero a la posicion de la imagen en el arreglo.
