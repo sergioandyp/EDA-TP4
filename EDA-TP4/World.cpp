@@ -97,5 +97,8 @@ void World::dispatcher(EVENT event) {
 	case QUIT:
 
 		break;
+	case EMPTY:
+
+		break;
 	}
 }
