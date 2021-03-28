@@ -1,5 +1,6 @@
 #include <iostream>
 #include "World.h"
+#include "grafica.h"
 
 using namespace std;
 
@@ -9,13 +10,39 @@ int main() {
 
 	World mundo;
 
-	testImages();
+
+	if (initAllegro())
+	{
+		return -1;
+	}
+
+	cout << "OK init" << endl;
+
+	if (loadImages(mundo.worms))
+	{
+		return -1;
+	}
+	cout << "OK load" << endl;
+
+	mundo.worms[0].setX(0);
+	mundo.worms[0].setY(600);
+	mundo.worms[0].setDirection(RIGHT);
+	mundo.worms[1].setX(1000);
+	mundo.worms[1].setY(600);
+	mundo.worms[1].setDirection(LEFT);
+
+	redraw(mundo.worms);
+	cout << "OK draw" << endl;
+
+	shutdownAllegro();
+	cout << "OK destroy" << endl;
+
+	//testImages();
 
 }
 
 void testImages() {
-
-	Worm worm;
+	/*Worm worm;
 	int walk[20];
 	int jump[20];
 
@@ -31,6 +58,7 @@ void testImages() {
 	for (int i = 0; i < 70; i++) {
 		cout << *(int*)worm.getImage(sizeof(walk[0])) << endl;
 		worm.update(0,0);
+		redraw(&worm);
 	}
 	cout << "Lo freno" << endl;
 	worm.stop();
@@ -53,7 +81,7 @@ void testImages() {
 		worm.update(0, 0);
 	}
 
-	cout << "FIN" << endl;
+	cout << "FIN" << endl;*/
 
 }
 

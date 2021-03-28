@@ -94,15 +94,17 @@ void shutdownAllegro(void) {
 
 bool loadImages(Worm worms[])
 {
-    if (loadBackground() == ERROR)
+    if (loadBackground())
     {
         return ERROR;
     }
-    else if (loadJumpImages(worms) == ERROR)
+
+    if (loadJumpImages(worms))
     {
+        
         return  ERROR;
     }
-    else if (loadWalkImages(worms) == ERROR)
+    if (loadWalkImages(worms))
     {
         return  ERROR;
     }
@@ -121,11 +123,18 @@ void redraw(Worm worms[])
     {
         if (worms[i].getDirection() == LEFT)
             // Si el worm se mueve hacia la izquierda lo mostramos normal.
-            al_draw_bitmap((ALLEGRO_BITMAP*)worms[i].getImage(sizeof(ALLEGRO_BITMAP*)), worms[i].getX(), worms[i].getY(), 0);
+            //(ALLEGRO_BITMAP*)worms[i].getImage(sizeof(ALLEGRO_BITMAP*))
+            al_draw_bitmap(walkingImg[0], (float)worms[i].getX(), (float)worms[i].getY(), 0);
+
         else if (worms[i].getDirection() == RIGHT)
             // Si el worm se mueve hacia la derecha lo mostramos espejada.
-            al_draw_bitmap((ALLEGRO_BITMAP*)worms[i].getImage(sizeof(ALLEGRO_BITMAP*)), worms[i].getX(), worms[i].getY(), ALLEGRO_FLIP_HORIZONTAL);
+        {
+            //(ALLEGRO_BITMAP*)worms[i].getImage(sizeof(ALLEGRO_BITMAP*));
+            al_draw_bitmap(walkingImg[0], (float)worms[i].getX(), (float)worms[i].getY(), ALLEGRO_FLIP_HORIZONTAL);
+        }
     }
+    al_flip_display();
+    al_rest(20); 
 }
 
 bool loadWalkImages(Worm worms[])
@@ -136,7 +145,7 @@ bool loadWalkImages(Worm worms[])
     //verificamos que la carga sea exitosa.
     for (int i = 0; i < CANT_WALK_IMG; i++)
     {
-        sprintf_s(ruta, "/wwalking/wwalk-F%d", (i+1));
+        sprintf_s(ruta, "./wwalking/wwalk-F%d.png", (i+1));
         walkingImg[i] = al_load_bitmap(ruta);
 
         if (walkingImg[i] == NULL)
@@ -167,9 +176,9 @@ bool loadJumpImages(Worm worms[])
         
     // Para cada frame, cargamos la imagen en un arreglo y 
     //verificamos que la carga sea exitosa.
-    for (int i = 0; i < CANT_WALK_IMG; i++)
+    for (int i = 0; i < CANT_JUMP_IMG; i++)
     {
-        sprintf_s(ruta, "/wjump/wjump-F%d", (i + 1));
+        sprintf_s(ruta, "./wjump/wjump-F%d.png", (i + 1));
         jumpingImg[i] = al_load_bitmap(ruta);
 
         if (jumpingImg[i] == NULL)
