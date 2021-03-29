@@ -5,7 +5,7 @@
 //constructor
 Worm::Worm(){
 	
-	this->tickCount = 0;
+	this->tickCount = 1;
 	this->state = STAND_BY;
 	this->jumpingImages = 0;
 	this->walkingImages = 0;
@@ -194,8 +194,8 @@ bool Worm::update(double walkSpeed, double jumpSpeed, double gravity) {
 				if (this->pos.x > 701) {	//Checkeo no irme del borde
 					this->pos.x -= speed[0];	//Actualizo la posicion
 				}
-				this->pos.y += speed[1];
-				if (this->pos.y <= 616) {
+				this->pos.y -= speed[1];
+				if (this->pos.y >= 616) {
 
 					this->pos.y = 616;
 					if (this->state == STOP_JUMPING) {
@@ -219,9 +219,9 @@ bool Worm::update(double walkSpeed, double jumpSpeed, double gravity) {
 				if (this->pos.x < 1212) {	//Checkeo no irme del borde, TODO: hardcode de la posicion del borde?
 					this->pos.x += speed[0];	//Actualizo la posicion
 				}
-				this->pos.y += speed[1];
+				this->pos.y -= speed[1];
 
-				if (this->pos.y <= 616) {
+				if (this->pos.y >= 616) {
 
 					this->pos.y = 616;
 					if (this->state == STOP_JUMPING) {

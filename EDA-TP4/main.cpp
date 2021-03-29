@@ -26,7 +26,7 @@ int main() {
 	redraw(mundo.worms);
 	cout << "OK draw" << endl;
 
-	EVENT evento = EMPTY;	//CAMBIAR A TICK CUANDO SE PRUEBE EL CODIGO COMPLETO
+	EVENT evento = TICK;
 
 	while (evento != QUIT) {
 
@@ -34,7 +34,7 @@ int main() {
 
 		// Debugger de eventos
 		if(evento != EMPTY && evento != TICK)
-		cout << "Evento: \t" << evento << endl;
+			cout << "Evento: \t" << evento << endl;
 
 		 if (evento == TICK) {
 
@@ -55,6 +55,7 @@ int main() {
 
 }
 
+/*
 void testImages() {
 	Worm worm;
 	int walk[20];
@@ -98,6 +99,7 @@ void testImages() {
 	cout << "FIN" << endl;
 
 }
+*/
 
 /* CLASES:
 

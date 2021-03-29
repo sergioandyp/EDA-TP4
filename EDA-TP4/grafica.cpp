@@ -121,8 +121,9 @@ void redraw(Worm worms[])
     //Dibujamos cada worm en su posicion apropiada y la imagen apropiada.
     for (int i = 0; i < CANT_WORMS; i++)
     {
-        imagen = (ALLEGRO_BITMAP*)worms[i].getImage(sizeof(ALLEGRO_BITMAP*));
-        
+
+        imagen = *( (ALLEGRO_BITMAP**) worms[i].getImage(sizeof(ALLEGRO_BITMAP*)) );
+
         if (worms[i].getDirection() == LEFT)
             // Si el worm se mueve hacia la izquierda lo mostramos normal.
             al_draw_bitmap(imagen, (float) worms[i].getX(), (float)worms[i].getY(), 0);
@@ -131,8 +132,7 @@ void redraw(Worm worms[])
             // Si el worm se mueve hacia la derecha lo mostramos espejada.
             al_draw_bitmap(imagen, (float)worms[i].getX(), (float)worms[i].getY(), ALLEGRO_FLIP_HORIZONTAL);
     }
-    al_flip_display();
-    al_rest(20);     
+    al_flip_display();   
 }
 
 bool loadWalkImages(Worm worms[])
