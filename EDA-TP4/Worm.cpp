@@ -1,6 +1,9 @@
 #include "Worm.h"
 #include <math.h>
 # define PI           3.14159265358979323846  /* pi */
+#define	LEFT_LIMIT	701
+#define	RIGHT_LIMIT	1152
+#define INF_LIMIT	616
 
 //constructor
 Worm::Worm(){
@@ -12,12 +15,10 @@ Worm::Worm(){
 }
 
 // getters
-unsigned int Worm::getX() {
-
+double Worm::getX() {
 	return this->pos.x;
 }
-unsigned int Worm::getY() {
-
+double Worm::getY() {
 	return this->pos.y;
 }
 unsigned int Worm::getTickCount() {
@@ -89,17 +90,18 @@ bool Worm::walk() {		// Setea estado a WALK y reinicia tickCount
 bool Worm::stopWalking() {		//Va a parar el movimiento del worm solamente si pasaron menos de 8 frames
 
 	int error = 0;
+	if (this->state == WALKING) {
+		if (this->tickCount <= 5) {
 
-	if (this->tickCount <= 8) {
+			this->state = STAND_BY;
+		}
+		else if (this->tickCount <= 50) {
 
-		this->state = STAND_BY;
-	}
-	else if (this->tickCount <= 50 && this->state == WALKING){
-
-		this->state = STOP_WALKING;	//En este caso quiero avisar que el movimiento debe detenerse ni bien termine la animacion
-	}
-	else {
-
+			this->state = STOP_WALKING;	//En este caso quiero avisar que el movimiento debe detenerse ni bien termine la animacion
+		}
+		else {
+			// ????
+		}
 	}
 
 	return error;
@@ -134,18 +136,18 @@ bool Worm::update(double walkSpeed, double jumpSpeed, double gravity) {
 
 	if (this->state == WALKING || this->state == STOP_WALKING) {
 
-		if (this->tickCount == 22 || this->tickCount == 36 || this->tickCount == 50) {	//Ticks donde me desplazo
+		if (this->tickCount == 21 || this->tickCount == 35 || this->tickCount == 49) {	//Ticks donde me desplazo (-1 porque despues incremento tick)
 
 			if (this->dir == RIGHT) {
 
-				if (this->pos.x < 1212) {	//Checkeo no irme del borde, TODO: hardcode de la posicion del borde?
+				if (this->pos.x < RIGHT_LIMIT) {	//Checkeo no irme del borde
 					this->pos.x += walkSpeed / 3;	//Lo muevo un cacho para la derecha, siguiendo la animacion 
 													//si la velocidad es 27 se movera 3 veces 9
 				}
 			}
 			else if (this->dir == LEFT) {
 
-				if (this->pos.x > 701) {	//Checkeo no irme del borde
+				if (this->pos.x > LEFT_LIMIT) {	//Checkeo no irme del borde
 					this->pos.x -= walkSpeed / 3;	//Lo muevo un cacho para la izquierda, siguiendo la animacion 
 													//si la velocidad es 27 se movera 3 veces 9
 				}
@@ -171,76 +173,48 @@ bool Worm::update(double walkSpeed, double jumpSpeed, double gravity) {
 			this->tickCount++;
 		}
 	}
-	else if (this->state == STAND_BY) {
-
-		//do nothing
-	}
-	if (this->state == JUMPING || this->state == STOP_JUMPING) {
+	else if (this->state == JUMPING || this->state == STOP_JUMPING) {
 
 		if (this->tickCount == 1) {	//Si es el primer tick seteo la velocidad inicial
 
 			this->speed[0] = jumpSpeed * cos(PI / 3);	//Vel en x
 			this->speed[1] = jumpSpeed * sin(PI / 3);	//Vel en y
 		}
-		if (this->tickCount <= 10) {	//TODO: nose muy bien hasta cuando el tickCount
 
+		if (this->tickCount < 10 || this->pos.y >= INF_LIMIT) {	// Sumo ticks en el warm up y cuando cae (no durante el vuelo)
 			this->tickCount++;
 		}
 
-		if (this->dir == LEFT) {
+		if (this->tickCount == 10)	// Solo actualizo la posicion durante el vuelo
+		{
 
-			if (this->tickCount > 5) {
-
-				if (this->pos.x > 701) {	//Checkeo no irme del borde
-					this->pos.x -= speed[0];	//Actualizo la posicion
-				}
-				this->pos.y -= speed[1];
-				if (this->pos.y >= 616) {
-
-					this->pos.y = 616;
-					if (this->state == STOP_JUMPING) {
-						this->state = STAND_BY;
-						this->tickCount = 1;
-					}
-					else if (this->state == JUMPING) {
-						this->tickCount = 1;
-					}
-				}
-
-				speed[1] -= gravity;		//Aplico la gravedad
+			if (this->dir == LEFT && this->pos.x > LEFT_LIMIT)		//Checkeo no irme del borde izquierdo
+			{
+				this->pos.x -= speed[0];	//Actualizo la posicion en X
+			}
+			else if (this->dir == RIGHT && this->pos.x < RIGHT_LIMIT)  //Checkeo no irme del borde derecho    , TODO: hardcode de la posicion del borde?
+			{
+				this->pos.x += speed[0];	//Actualizo la posicion en X
 			}
 
-		}
-		else if (this->dir == RIGHT) {
+			this->pos.y -= speed[1];	//Actualizo la posicion en Y
 
+			speed[1] -= gravity;		//Aplico la gravedad
 
-			if (this->tickCount > 5) {
-
-				if (this->pos.x < 1212) {	//Checkeo no irme del borde, TODO: hardcode de la posicion del borde?
-					this->pos.x += speed[0];	//Actualizo la posicion
-				}
-				this->pos.y -= speed[1];
-
-				if (this->pos.y >= 616) {
-
-					this->pos.y = 616;
-					if (this->state == STOP_JUMPING) {
-						this->state = STAND_BY;
-						this->tickCount = 1;
-					}
-					else if (this->state == JUMPING) {
-						this->tickCount = 1;
-					}
-				}
-	
-				speed[1] -= gravity;		//Aplico la gravedad
+			if (this->pos.y >= INF_LIMIT) {	//Checkeo no irme del borde derecho
+				this->pos.y = INF_LIMIT;
 			}
-			
 		}
-		else {
-
-			error = 1;
+		
+		if (this->tickCount > 15) {
+			if (this->state == STOP_JUMPING) {
+				this->state = STAND_BY;
+			}
+			this->tickCount = 1;
 		}
+	}
+	else if (this->state == STAND_BY) {
+		//do nothing
 	}
 
 	return error;

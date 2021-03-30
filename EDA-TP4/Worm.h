@@ -14,8 +14,8 @@ public:
 	Worm();
 
 	// getters
-	unsigned int getX();
-	unsigned int getY();
+	double getX();
+	double getY();
 	unsigned int getTickCount();
 	unsigned int getStates();
 	unsigned int getDirection();
@@ -50,8 +50,6 @@ private:
 	double speed[2];	// {Vx, Vy}
 	void* jumpingImages;
 	void* walkingImages;
-
-	bool isOnFloor();		// Debe devolver si el worm esta tocando el piso o no
 };
 
 #endif

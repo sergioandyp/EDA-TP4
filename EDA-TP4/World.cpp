@@ -25,69 +25,95 @@ void World::dispatcher(EVENT event) {
 	switch (event) {
 
 		/*
-		//	EVENTOS DE MOVIMIENTO LATERAL
+		//					EVENTOS DE MOVIMIENTO LATERAL
 		*/
 
 	case DOWN_KEY_A:
-	
-		this->worms[0].setDirection(LEFT);	
-		this->worms[0].walk();	//cambio el estado a Walking y reinicio el tickCount
-	
+
+		if (this->worms[0].getStates() == STAND_BY)
+		{
+			this->worms[0].setDirection(LEFT);
+			this->worms[0].walk();	//cambio el estado a Walking y reinicio el tickCount
+		}
 		break;
+
 	case UP_KEY_A:
 
-		this->worms[0].stopWalking();	// OJO! el stop es solo para el walk, pero si esta saltando?
-
+		if (this->worms[0].getStates() == WALKING)
+			this->worms[0].stopWalking();	// OJO! el stop es solo para el walk, pero si esta saltando?
 		break;
+
 	case DOWN_KEY_LEFT:
 
-		this->worms[1].setDirection(LEFT);
-		this->worms[1].walk();	//cambio el estado a Walking y reinicio el tickCount
-
+		if (this->worms[1].getStates() == STAND_BY)
+		{
+			this->worms[1].setDirection(LEFT);
+			this->worms[1].walk();	//cambio el estado a Walking y reinicio el tickCount
+		}
 		break;
+
 	case UP_KEY_LEFT:
 
-		this->worms[1].stopWalking();
-
+		if (this->worms[1].getStates() == WALKING)
+			this->worms[1].stopWalking();
 		break;
+
 	case DOWN_KEY_D:
 
-		this->worms[0].setDirection(RIGHT);
-		this->worms[0].walk();	//cambio el estado a Walking y reinicio el tickCount
-
+		if (this->worms[0].getStates() == STAND_BY)
+		{
+			this->worms[0].setDirection(RIGHT);
+			this->worms[0].walk();	//cambio el estado a Walking y reinicio el tickCount
+		}
 		break;
+
 	case UP_KEY_D:
 
-		this->worms[0].stopWalking();
-
+		if (this->worms[0].getStates() == WALKING)
+			this->worms[0].stopWalking();
 		break;
+
 	case DOWN_KEY_RIGHT:
 
-		this->worms[1].setDirection(RIGHT);
-		this->worms[1].walk();	//cambio el estado a Walking y reinicio el tickCount
-
+		if (this->worms[1].getStates() == STAND_BY)
+		{
+			this->worms[1].setDirection(RIGHT);
+			this->worms[1].walk();	//cambio el estado a Walking y reinicio el tickCount
+		}
 		break;
+
 	case UP_KEY_RIGHT:
 
-		this->worms[1].stopWalking();
-
+		if (this->worms[1].getStates() == WALKING)
+			this->worms[1].stopWalking();
 		break;
 	
 		/*
-		//	EVENTOS DE SALTO
+						EVENTOS DE SALTO
 		*/
 
 	case DOWN_KEY_W:
-		this->worms[0].jump();
+
+		if(this->worms[0].getStates() == STAND_BY)
+			this->worms[0].jump();
 		break;
+
 	case UP_KEY_W:
+
+			if (this->worms[0].getStates() == JUMPING)
 		this->worms[0].stopJumping();
 		break;
+
 	case DOWN_KEY_UP:
-		this->worms[1].jump();
+
+		if (this->worms[1].getStates() == STAND_BY)
+			this->worms[1].jump();
 		break;
+
 	case UP_KEY_UP:
-		this->worms[1].stopJumping();
+
+		if (this->worms[1].getStates() == JUMPING)
+			this->worms[1].stopJumping();
 		break;
 
 		/*
@@ -95,10 +121,9 @@ void World::dispatcher(EVENT event) {
 		*/
 
 	case QUIT:
-
 		break;
-	case EMPTY:
 
+	case EMPTY:
 		break;
 	}
 }

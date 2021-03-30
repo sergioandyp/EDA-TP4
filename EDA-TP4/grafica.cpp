@@ -126,7 +126,7 @@ void redraw(Worm worms[])
 
         if (worms[i].getDirection() == LEFT)
             // Si el worm se mueve hacia la izquierda lo mostramos normal.
-            al_draw_bitmap(imagen, (float) worms[i].getX(), (float)worms[i].getY(), 0);
+            al_draw_bitmap(imagen, (float)worms[i].getX(), (float)worms[i].getY(), 0);
 
         else if (worms[i].getDirection() == RIGHT)
             // Si el worm se mueve hacia la derecha lo mostramos espejada.
@@ -144,7 +144,7 @@ bool loadWalkImages(Worm worms[])
     for (int i = 0; i < CANT_WALK_IMG; i++)
     {
         sprintf_s(ruta, "./wwalking/wwalk-F%d.png", (i+1));
-        walkingImg[i] = al_load_bitmap(ruta);
+         walkingImg[i] = al_load_bitmap(ruta);
 
         if (walkingImg[i] == NULL)
         {
