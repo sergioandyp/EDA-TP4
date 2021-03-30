@@ -253,9 +253,9 @@ void* Worm::getImage(unsigned int imagesize) {
 	case JUMPING:
 	case STOP_JUMPING:
 
-		image = (char*) this->jumpingImages;
 
 		if (tickCount >= 6 && tickCount <= 15) {	// ------> ASUMO QUE LOS TICKS NO SE CUENTAN MIENTRAS ESTA EN EL AIRE <--------
+			image = (char*) this->jumpingImages;
 			image += imagesize * (tickCount - 6);
 		}
 

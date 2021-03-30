@@ -100,8 +100,8 @@ void World::dispatcher(EVENT event) {
 
 	case UP_KEY_W:
 
-			if (this->worms[0].getStates() == JUMPING)
-		this->worms[0].stopJumping();
+		if (this->worms[0].getStates() == JUMPING)
+			this->worms[0].stopJumping();
 		break;
 
 	case DOWN_KEY_UP:
