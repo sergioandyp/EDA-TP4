@@ -20,17 +20,17 @@ public:
 	unsigned int getStates();
 	unsigned int getDirection();
 
-	// setters (devuelve 1 si hubo error)
-	bool setX(unsigned int x);
-	bool setY(unsigned int y);
-	bool setDirection(DIRECTION dire);
-	bool setWalkImages(void* w_images);
-	bool setJumpImages(void* j_images);
+	// setters
+	void setX(unsigned int x);
+	void setY(unsigned int y);
+	void setDirection(DIRECTION dire);
+	bool setWalkImages(void* w_images);	//Devuelve 1 en caso de error
+	bool setJumpImages(void* j_images);	//Devuelve 1 en caso de error
 
 	// Movement
 	bool jump();		// Setea estado a JUMP
 	bool walk();		// Setea estado a WALK
-	bool stopWalking();		// OJO! ACA HABRIA QUE CONSIDERAR LA DIRECCION TAMBIEN
+	bool stopWalking();	
 	bool stopJumping();
 
 	bool update(double walkSpeed, double jumpSpeed, double gravity);

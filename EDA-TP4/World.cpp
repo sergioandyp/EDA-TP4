@@ -18,6 +18,7 @@ World::World() {
 	this->walkSpeed = 27;	//Dada pixeles por segundo
 }
 
+/*Maneja todos los eventos que no sean los de tick*/
 void World::dispatcher(EVENT event) {
 
 	//El worm de la izquierda se maneja con AWD y el de la derecha con las flechas

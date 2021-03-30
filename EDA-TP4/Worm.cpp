@@ -36,33 +36,28 @@ unsigned int Worm::getDirection() {
 
 
 
-// setters (devuelve 1 si hubo error)
-bool Worm::setX(unsigned int x) {
+// setters 
+void Worm::setX(unsigned int x) {
 
 	this->pos.x = x;
-	return 0;	//TODO: Como puede tener esto un error?		//  Avisar si se toca un limite?
 }
-bool Worm::setY(unsigned int y) {
+void Worm::setY(unsigned int y) {
 
 	this->pos.y = y;
-	return 0;	//TODO: Como puede tener esto un error?
 }
-bool Worm::setDirection(DIRECTION dire) {
+void Worm::setDirection(DIRECTION dire) {
 
 	this->dir = dire;
-	return 0;	//TODO: Como puede tener esto un error?
 }
 bool Worm::setWalkImages(void* w_images) {
 
 	this->walkingImages = w_images;
-	return 0;	//TODO: Como puede tener esto un error?
-
+	return 0;
 }
 bool Worm::setJumpImages(void* j_images) {
 	
 	this->jumpingImages = j_images;
-	return 0;	//TODO: Como puede tener esto un error?
-
+	return 0;
 }
 
 
@@ -100,7 +95,8 @@ bool Worm::stopWalking() {		//Va a parar el movimiento del worm solamente si pas
 			this->state = STOP_WALKING;	//En este caso quiero avisar que el movimiento debe detenerse ni bien termine la animacion
 		}
 		else {
-			// ????
+			
+			error = 1;
 		}
 	}
 
@@ -130,6 +126,7 @@ bool Worm::stopJumping() {
 	return error;
 }
 
+/*Actualiza a partir de la velocidad y el estado de cada worm la posicion de los mismos*/
 bool Worm::update(double walkSpeed, double jumpSpeed, double gravity) {
 
 	int error = 0;
@@ -224,7 +221,7 @@ bool Worm::update(double walkSpeed, double jumpSpeed, double gravity) {
 // La imagen corresponde al estado actual del worm
 void* Worm::getImage(unsigned int imagesize) {
 
-	char* image = ((char*)this->walkingImages);		// La de STAND_BY seria la primera?
+	char* image = ((char*)this->walkingImages);		// La de STAND_BY seria la primera
 
 	switch (this->state) {
 	case STAND_BY:
