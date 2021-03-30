@@ -14,7 +14,7 @@ World::World() {
 	this->worms[1].setDirection(LEFT);
 
 	this->gravity = 0.24;
-	this->jumpSpeed = 4.5;	//TODO: Nose en que esta dada	
+	this->jumpSpeed = 4.5;	//Dada en pixeles por tick
 	this->walkSpeed = 27;	//Dada pixeles por segundo
 }
 
@@ -40,7 +40,7 @@ void World::dispatcher(EVENT event) {
 	case UP_KEY_A:
 
 		if (this->worms[0].getStates() == WALKING)
-			this->worms[0].stopWalking();	// OJO! el stop es solo para el walk, pero si esta saltando?
+			this->worms[0].stopWalking();	
 		break;
 
 	case DOWN_KEY_LEFT:

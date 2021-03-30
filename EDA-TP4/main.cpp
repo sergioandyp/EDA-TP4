@@ -13,7 +13,6 @@ int main() {
 		return -1;
 	}
 
-
 	if (loadImages(mundo.worms))
 	{
 		return -1;
@@ -39,22 +38,4 @@ int main() {
 	}
 
 	shutdownAllegro();
-
 }
-
-/* CLASES:
-
-	- Worm
-		- constructor
-		- jump()
-		- move()
-		- po
-		- set/getX()
-		- set/getY()
-		- ALLEGRO_BITMAP images[]
-		private:
-			- tickCount
-	- World
-		- contructor
-		- 
-*/
