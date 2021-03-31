@@ -4,12 +4,12 @@
 World::World() {
 
 	//Worm de la izquierda
-	this->worms[0].setX(685);	
+	this->worms[0].setX(701);	
 	this->worms[0].setY(616);
 	this->worms[0].setDirection(RIGHT);
 
 	//Worm de la derecha
-	this->worms[1].setX(1170);
+	this->worms[1].setX(1152);
 	this->worms[1].setY(616);
 	this->worms[1].setDirection(LEFT);
 

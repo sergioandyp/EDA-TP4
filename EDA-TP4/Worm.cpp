@@ -46,8 +46,9 @@ void Worm::setY(unsigned int y) {
 	this->pos.y = y;
 }
 void Worm::setDirection(DIRECTION dire) {
-
-	this->dir = dire;
+	if (this->state == STAND_BY) {
+		this->dir = dire;
+	}
 }
 bool Worm::setWalkImages(void* w_images) {
 
@@ -64,22 +65,21 @@ bool Worm::setJumpImages(void* j_images) {
 // Movement
 bool Worm::jump() {	// Setea estado a JUMP y reinicia tickCount
 
-	this->state = JUMPING;
-	if (this->state != STOP_JUMPING) {
+	if (this->state == STAND_BY) {
+		this->state = JUMPING;
 		this->tickCount = 1;
+		return true;	
 	}
-
-	return true;	
-
+	return false;
 }
 bool Worm::walk() {		// Setea estado a WALK y reinicia tickCount
 
-	this->state = WALKING;
-	if (this->state != STOP_WALKING) {	//Solo le reinicio el contador si ya no estaba moviendose
-										//Entonces si vos apretaste mientras ya se estaba moviendo va a terminar de moverse
-		this->tickCount = 1;			//Y va a seguir moviendose hasta que sueltes la tecla
+	if (this->state == STAND_BY) {	//Solo le reinicio el contador si ya no estaba moviendose
+		this->state = WALKING;		//Entonces si vos apretaste mientras ya se estaba moviendo va a terminar de moverse
+		this->tickCount = 1;		//Y va a seguir moviendose hasta que sueltes la tecla
+		return true;	
 	}
-	return true;	
+	return false;
 }
 
 bool Worm::stopWalking() {		//Va a parar el movimiento del worm solamente si pasaron menos de 8 frames
